@@ -116,33 +116,7 @@
     </div>
     <!-- Navbar & Hero End -->
     
-    <h2>AYO BELAJAR</h2>
-  <h3>score:<span id="score">0</span></h3>
-  <div id="board" style="background-position:0px;">
-    <div id="area">
-      <div id="dino"></div>
-      <div id="box"></div>
-    </div>
-  </div>
-  <script type="text/javaScript">
-       function setBackgroundMoving(){
-         setTimeout(function(){
-           
-           //background berjalan
-           var bg = document.getElementById('board');
-           bg.style.backgroundPosition = (parseInt(bg.style.backgroundPosition.replace('px','',))-1) + 'px';
-           
-           //update live score
-           document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML) + 1;
-           
-           //panggil fungsinya terus menerus
-           setBackgroundMoving();
-         },5);
-       }
-       //inisialisasi fungsi berjalan
-      setBackgroundMoving();
- 
-     </script>
+
     <!-- youtube wisuda start-->
     <section class="section video" data-section="section5">
     <div class="container">
