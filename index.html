@@ -202,26 +202,9 @@
       setBackgroundMoving();
            //update live score
          document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML) + 1;
-           
-           //panggil box terus menerus
-          
-       
-       window.addEventListener('keyup',function(e){
-         
-         //untuk mendeteksi tombol spasi
-         if(e.keycode == 32) {
-           //setting dino untuk lompat
-           document.getElementById('dino').style.margintop="30px";
-           document.getElementById('dino').setAttribute=('class','freeze');
-           //setting dino kembali ke semula
-           setTimeout(function(){
-            document.getElementById('dino').style.margintop="170px";
-           document.getElementById('dino').setAttribute=('class','');
-           },1000);
-         }
-       });
+     
  
-           </script>
+     </script>
     <!-- youtube wisuda start-->
     <section class="section video" data-section="section5">
     <div class="container">
