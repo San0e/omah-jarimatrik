@@ -30,6 +30,66 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"  href="style.css">
+    <style>
+        h1, h2 {
+  text-align: center;
+
+}
+#board{
+    width: 600px;
+    height: 300px;
+    background:url('img/bg.jpg');
+    background-size:100% 100%;
+    margin: 20px auto;
+    }
+#area {
+   width: 600px;
+   height 300px;
+   position: absolute;
+   overflow: hidden;
+ }   
+
+@keyframes lari{
+  0%{
+    background: url('img/run1.png');
+    background-size: 100px 100px;
+  }
+  20%{
+    background: url('img/run2.png');
+    background-size: 100px 100px;
+  }
+  50%{
+    background: url('img/run7.png');
+    background-size: 100px 100px;
+  }
+  75%{
+    background: url('img/run8.png');
+    background-size: 100px 100px;
+  }
+}
+#dino {
+  width: 100px;
+  height: 100px;
+  background: url('img/run1.png');
+  background-size: 100% 100%;
+  position: absolute;
+  margin-top: 170px;
+  margin-left: 50px;
+  animation: lari 0.3s infinite; 
+}
+#box{
+  width: 50px;
+  height 50px;
+  margin-top: 260px;
+  background: url('img/red-box.png');
+  background-size: 100% 100%;
+  margin-left:600px;
+  
+}
+
+
+    </style>
 </head>
 
 <body>
