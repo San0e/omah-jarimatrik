@@ -334,6 +334,61 @@ section.video .left-content .main-button {
     letter-spacing: 1px;
 }
 
+h1, h2 {
+  text-align: center;
+  font-family: Sans-Serif;
+}
+#board{
+    width: 400px;
+    height: 300px;
+    background:url('images/bg.jpg');
+    background-size:100% 100%;
+    margin: 20px auto;
+    }
+#area {
+   width: 400px;
+   height 300px;
+   position: absolute;
+   overflow: hidden;
+ }   
+
+@keyframes lari{
+  0%{
+    background: url('images/run1.png');
+    background-size: 100px 100px;
+  }
+  20%{
+    background: url('images/run2.png');
+    background-size: 100px 100px;
+  }
+  50%{
+    background: url('images/run7.png');
+    background-size: 100px 100px;
+  }
+  75%{
+    background: url('images/run8.png');
+    background-size: 100px 100px;
+  }
+}
+#dino {
+  width: 100px;
+  height: 100px;
+  background: url('images/run1.png');
+  background-size: 100% 100%;
+  position: absolute;
+  margin-top: 170px;
+  margin-left: 50px;
+  animation: lari 0.3s infinite; 
+}
+#box{
+  width: 50px;
+  height 50px;
+  margin-top: 260px;
+  background: url('images/red-box.png');
+  background-size: 100% 100%;
+  margin-left:600px;
+  
+}
 
 /*** Service ***/
 .service-item {
