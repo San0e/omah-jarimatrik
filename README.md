@@ -1,1 +1,1 @@
-# omah-jarimatrik
+# BIMBEL JARIMATRIK
