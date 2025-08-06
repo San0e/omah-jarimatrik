@@ -1,0 +1,144 @@
+/* General Styles */
+body {
+    font-family: "Comic Sans MS", sans-serif;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.app-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    min-height: 70vh;
+    position: relative;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #ff6f61;
+    font-size: 3rem;
+    margin: 10px 0;
+}
+
+.math-problem {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#problem {
+    font-size: 8rem;
+    color: #333;
+    margin: 20px 0;
+    font-weight: 700;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.option {
+    font-size: 4rem;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1 1 40%;
+    max-width: 200px;
+}
+
+.option:hover {
+    background-color: #45a049;
+}
+
+#feedback {
+    font-size: 2rem;
+    margin-top: 20px;
+    color: #ff6f61;
+}
+
+#next-button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff6f61;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+}
+
+#next-button:hover {
+    background-color: #ff4a3d;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    #problem {
+        font-size: 6rem;
+    }
+
+    .option {
+        font-size: 3rem;
+        padding: 10px 20px;
+        max-width: 150px;
+    }
+
+    #feedback {
+        font-size: 1.5rem;
+    }
+
+    #next-button {
+        font-size: 1.3rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    #problem {
+        font-size: 4.5rem;
+    }
+
+    .option {
+        font-size: 2.5rem;
+        padding: 8px 16px;
+        max-width: 120px;
+    }
+
+    #feedback {
+        font-size: 1.2rem;
+    }
+
+    #next-button {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+}
