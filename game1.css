@@ -4,18 +4,18 @@ body {
   background: linear-gradient(to right, #ffecd2, #fcb69f);
   font-family: 'Comic Sans MS', cursive, sans-serif;
   text-align: center;
-  padding: 50px;
+  padding: 100px;
   color: #333;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 10em;
   color: #ff6f61;
   text-shadow: 2px 2px #ffe5e0;
 }
 
 #question {
-  font-size: 2em;
+  font-size: 10em;
   margin: 20px 0;
   background: #fff5e6;
   display: inline-block;
@@ -30,10 +30,10 @@ form {
 
 input[type="number"] {
   padding: 10px 20px;
-  font-size: 1.5em;
+  font-size: 10em;
   border: 2px solid #ffa07a;
   border-radius: 10px;
-  width: 300px;
+  width: 400px;
   text-align: center;
 }
 
@@ -42,7 +42,7 @@ button {
   color: white;
   border: none;
   padding: 12px 25px;
-  font-size: 5em;
+  font-size: 10em;
   border-radius: 10px;
   cursor: pointer;
   margin-left: 10px;
@@ -63,7 +63,7 @@ button:hover {
   background: #ffb347;
   color: white;
   padding: 12px 25px;
-  font-size: 1.2em;
+  font-size: 10em;
   border-radius: 10px;
   cursor: pointer;
   margin-top: 20px;
@@ -74,7 +74,7 @@ button:hover {
   background: #e89d30;
 }
 #logo {
-  width: 300px;
+  width: 400px;
   margin-bottom: 20px;
   border-radius: 20px;
 }
