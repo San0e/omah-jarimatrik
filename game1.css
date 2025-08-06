@@ -29,7 +29,7 @@ form {
 }
 
 input[type="number"] {
-  padding: 10px 20px;
+  padding: 24px 50px;
   font-size: 5em;
   border: 2px solid #ffa07a;
   border-radius: 10px;
@@ -74,7 +74,7 @@ button:hover {
   background: #e89d30;
 }
 #logo {
-  width: 300px;
+  width: 400px;
   margin-bottom: 20px;
   border-radius: 20px;
 }
