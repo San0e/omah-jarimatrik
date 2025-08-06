@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Game Matematika untuk Anak-Anak</title>
+    <link rel="stylesheet" href="game1.css">
+  </head>
+  <body>
+    <img src="img/logo.jpg" alt="Logo JariMatrik" id="logo">
+    <h1>Game Jarimatrik</h1>
+    <div id="question"></div>
+    <form>
+      <input type="number" id="answer">
+      <button type="submit">Jawab</button>
+    </form>
+    <div id="result"></div>
+    <button id="next">Selanjutnya</button>
+    <script src="game1.js"></script>
+  </body>
+</html>
