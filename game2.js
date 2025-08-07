@@ -82,10 +82,10 @@ function generateOptions() {
 options.forEach((option) => {
     option.addEventListener("click", () => {
         if (Number(option.textContent) === correctAnswer) {
-            feedbackElement.textContent = "Correct! 🎉";
+            feedbackElement.textContent = "BENAR! 🎉";
             option.style.backgroundColor = "#8bc34a"; // Green for correct
         } else {
-            feedbackElement.textContent = "Oops! Try again. 😅";
+            feedbackElement.textContent = "Oops! COBA LAGI. 😅";
             option.style.backgroundColor = "#f44336"; // Red for incorrect
         }
     });
