@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Matematika Anak</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.app {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+#score {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.problem {
+    font-size: 28px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.options button {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #4caf50;
+    color: white;
+    transition: 0.2s;
+}
+
+.options button:hover {
+    transform: scale(1.05);
+}
+
+.correct {
+    background: #2ecc71 !important;
+}
+
+.wrong {
+    background: #e74c3c !important;
+}
+
+#feedback {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#next {
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    background: #3498db;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+    <h1>🧮 Belajar Matematika</h1>
+    <div id="score">Skor: 0</div>
+
+    <div class="problem" id="problem"></div>
+
+    <div class="options">
+        <button class="option"></button>
+        <button class="option"></button>
+        <button class="option"></button>
+    </div>
+
+    <div id="feedback"></div>
+    <button id="next">Soal Selanjutnya</button>
+</div>
+
+<!-- AUDIO -->
+<audio id="sound-correct" src="correct.mp3"></audio>
+<audio id="sound-wrong" src="wrong.mp3"></audio>
+
+<script>
+const problemEl = document.getElementById("problem");
+const optionsEl = document.querySelectorAll(".option");
+const feedbackEl = document.getElementById("feedback");
+const nextBtn = document.getElementById("next");
+const scoreEl = document.getElementById("score");
+
+const soundCorrect = document.getElementById("sound-correct");
+const soundWrong = document.getElementById("sound-wrong");
+
+let correctAnswer;
+let score = 0;
+let answered = false;
+
+// Random warna
+function randomColor() {
+    return "#" + Math.floor(Math.random()*16777215).toString(16);
+}
+
+// Generate soal
+function generateProblem() {
+    answered = false;
+    feedbackEl.textContent = "";
+    nextBtn.disabled = true;
+
+    let a = Math.floor(Math.random()*10)+1;
+    let b = Math.floor(Math.random()*10)+1;
+    let ops = ["+","-","×","÷"];
+    let op = ops[Math.floor(Math.random()*ops.length)];
+
+    if (op === "-") {
+        if (a < b) [a, b] = [b, a];
+        correctAnswer = a - b;
+    } else if (op === "+") {
+        correctAnswer = a + b;
+    } else if (op === "×") {
+        correctAnswer = a * b;
+    } else if (op === "÷") {
+        correctAnswer = a;
+        a = a * b;
+    }
+
+    problemEl.innerHTML = `
+        <span style="color:${randomColor()}">${a}</span>
+        <span style="color:${randomColor()}">${op}</span>
+        <span style="color:${randomColor()}">${b}</span>
+        =
+        ?
+    `;
+
+    generateOptions();
+}
+
+// Generate pilihan
+function generateOptions() {
+    let arr = [correctAnswer];
+
+    while (arr.length < 3) {
+        let rand = correctAnswer + Math.floor(Math.random()*7)-3;
+        if (!arr.includes(rand) && rand >= 0) {
+            arr.push(rand);
+        }
+    }
+
+    arr.sort(()=>Math.random()-0.5);
+
+    optionsEl.forEach((btn, i)=>{
+        btn.textContent = arr[i];
+        btn.className = "option";
+        btn.disabled = false;
+    });
+}
+
+// Klik jawaban
+optionsEl.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+        if (answered) return;
+        answered = true;
+
+        let val = Number(btn.textContent);
+
+        if (val === correctAnswer) {
+            btn.classList.add("correct");
+            feedbackEl.textContent = "Benar! 🎉";
+            soundCorrect.play();
+            score++;
+        } else {
+            btn.classList.add("wrong");
+            feedbackEl.textContent = "Salah! 😅";
+            soundWrong.play();
+
+            optionsEl.forEach(b=>{
+                if (Number(b.textContent) === correctAnswer) {
+                    b.classList.add("correct");
+                }
+            });
+        }
+
+        scoreEl.textContent = "Skor: " + score;
+
+        optionsEl.forEach(b=>b.disabled = true);
+        nextBtn.disabled = false;
+    });
+});
+
+// Next
+nextBtn.addEventListener("click", generateProblem);
+
+// Start
+generateProblem();
+</script>
+
+</body>
+</html>
