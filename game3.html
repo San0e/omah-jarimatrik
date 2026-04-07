@@ -79,9 +79,9 @@ h1 {
     border-radius: 10px;
     cursor: pointer;
 }
-
 </style>
 </head>
+
 <body>
 
 <div class="app">
@@ -100,9 +100,9 @@ h1 {
     <button id="next">Soal Selanjutnya</button>
 </div>
 
-<!-- AUDIO -->
-<audio id="sound-correct" src="correct.mp3"></audio>
-<audio id="sound-wrong" src="wrong.mp3"></audio>
+<!-- AUDIO (sudah pakai preload biar cepat) -->
+<audio id="sound-correct" src="correct.mp3" preload="auto"></audio>
+<audio id="sound-wrong" src="wrong.mp3" preload="auto"></audio>
 
 <script>
 const problemEl = document.getElementById("problem");
@@ -118,12 +118,19 @@ let correctAnswer;
 let score = 0;
 let answered = false;
 
-// Random warna
+// 🔊 Fungsi audio TERBAIK (anti gagal)
+function playSound(sound) {
+    const s = sound.cloneNode(true);
+    s.volume = 0.8;
+    s.play().catch(() => {});
+}
+
+// 🎨 Random warna
 function randomColor() {
     return "#" + Math.floor(Math.random()*16777215).toString(16);
 }
 
-// Generate soal
+// 🧠 Generate soal
 function generateProblem() {
     answered = false;
     feedbackEl.textContent = "";
@@ -150,14 +157,13 @@ function generateProblem() {
         <span style="color:${randomColor()}">${a}</span>
         <span style="color:${randomColor()}">${op}</span>
         <span style="color:${randomColor()}">${b}</span>
-        =
-        ?
+        = ?
     `;
 
     generateOptions();
 }
 
-// Generate pilihan
+// 🎯 Generate pilihan jawaban
 function generateOptions() {
     let arr = [correctAnswer];
 
@@ -177,7 +183,7 @@ function generateOptions() {
     });
 }
 
-// Klik jawaban
+// 🖱️ Klik jawaban
 optionsEl.forEach(btn=>{
     btn.addEventListener("click", ()=>{
         if (answered) return;
@@ -188,12 +194,12 @@ optionsEl.forEach(btn=>{
         if (val === correctAnswer) {
             btn.classList.add("correct");
             feedbackEl.textContent = "Benar! 🎉";
-            soundCorrect.play();
+            playSound(soundCorrect);
             score++;
         } else {
             btn.classList.add("wrong");
             feedbackEl.textContent = "Salah! 😅";
-            soundWrong.play();
+            playSound(soundWrong);
 
             optionsEl.forEach(b=>{
                 if (Number(b.textContent) === correctAnswer) {
@@ -209,10 +215,10 @@ optionsEl.forEach(btn=>{
     });
 });
 
-// Next
+// ⏭️ Next soal
 nextBtn.addEventListener("click", generateProblem);
 
-// Start
+// 🚀 Start awal
 generateProblem();
 </script>
 
