@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sliding Puzzle Pro</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    font-family: Arial;
+}
+
+h1 { margin-bottom: 5px; }
+
+#info {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* Puzzle */
+#puzzle-container {
+    display: grid;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 20px;
+    background: #e0e5ec;
+    box-shadow: 8px 8px 15px rgba(0,0,0,0.2),
+                -8px -8px 15px rgba(255,255,255,0.7);
+}
+
+/* Tile */
+.tile {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2),
+                -5px -5px 10px rgba(255,255,255,0.6);
+}
+
+.tile:active {
+    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.2),
+                inset -3px -3px 6px rgba(255,255,255,0.6);
+}
+
+.tile.empty {
+    background: #dfe6e9;
+    cursor: default;
+}
+
+/* Tombol */
+.controls {
+    margin-top: 10px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #2ecc71;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover { background: #27ae60; }
+</style>
+</head>
+
+<body>
+
+<h1>🧩 Game Susun Angka</h1>
+<div id="info">
+⏱️ Waktu: <span id="time">0</span> detik | 🏆 Langkah: <span id="moves">0</span>
+</div>
+
+<div id="puzzle-container"></div>
+
+<div class="controls">
+<button onclick="setMode(3)">Mode 3x3</button>
+<button onclick="setMode(4)">Mode 4x4</button>
+<button onclick="shuffle()">🔄 Acak</button>
+</div>
+
+<!-- Audio -->
+<audio id="moveSound" src="swipe.mp3"></audio>
+<audio id="winSound" src="tepuk tangan.mp3"></audio>
+
+<script>
+let size = 3;
+let tiles = [];
+let moves = 0;
+let time = 0;
+let timer;
+let started = false;
+
+const container = document.getElementById("puzzle-container");
+const moveSound = document.getElementById("moveSound");
+const winSound = document.getElementById("winSound");
+
+function setMode(n) {
+    size = n;
+    startGame();
+}
+
+function startGame() {
+    tiles = [];
+    for (let i = 1; i < size*size; i++) tiles.push(i);
+    tiles.push("");
+
+    moves = 0;
+    time = 0;
+    started = false;
+
+    clearInterval(timer);
+    updateInfo();
+
+    container.style.gridTemplateColumns = `repeat(${size}, 90px)`;
+    container.style.gridTemplateRows = `repeat(${size}, 90px)`;
+
+    shuffle();
+}
+
+function render() {
+    container.innerHTML = "";
+
+    tiles.forEach((val, i) => {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+
+        if (val === "") {
+            tile.classList.add("empty");
+        } else {
+            tile.textContent = val;
+            tile.style.background = `hsl(${val*40},70%,55%)`;
+            tile.onclick = () => move(i);
+        }
+
+        container.appendChild(tile);
+    });
+}
+
+function move(i) {
+    const empty = tiles.indexOf("");
+    const valid = [
+        i-1, i+1,
+        i-size, i+size
+    ];
+
+    if (valid.includes(empty)) {
+        [tiles[i], tiles[empty]] = [tiles[empty], tiles[i]];
+        moveSound.play();
+
+        moves++;
+        if (!started) startTimer();
+
+        render();
+        updateInfo();
+        checkWin();
+    }
+}
+
+function shuffle() {
+    for (let i = tiles.length-1; i>0; i--) {
+        let j = Math.floor(Math.random()*(i+1));
+        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+    }
+    render();
+}
+
+function startTimer() {
+    started = true;
+    timer = setInterval(()=>{
+        time++;
+        updateInfo();
+    },1000);
+}
+
+function updateInfo() {
+    document.getElementById("moves").textContent = moves;
+    document.getElementById("time").textContent = time;
+}
+
+function checkWin() {
+    let win = [];
+    for (let i = 1; i < size*size; i++) win.push(i);
+    win.push("");
+
+    if (JSON.stringify(tiles) === JSON.stringify(win)) {
+        clearInterval(timer);
+        winSound.play();
+        setTimeout(()=>{
+            alert(`🎉 Selamat Anda Menang!\nLangkah: ${moves}\nWaktu: ${time} detik`);
+        },200);
+    }
+}
+
+startGame();
+</script>
+
+</body>
+</html>
